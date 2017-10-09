@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Evens Gis</title>
+    <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />-->
+    <!-- Leaflets CSS:-->
+    <<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin=""/>
+</head>
+<body>
+<!-- Leaflets Javascript-fil: (maa alltid inn etter CSS)-->
+<!--<script src="http://cdn.leafletjs.com/leaflet-0.7.3/Leaflet"></script>-->
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+        crossorigin=""></script>
+<!-- Start init map-->
+<!-- define mapBoundaries etc.-->
+<div id="mapid"style=" position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 99%;"></div>
+<!-- Script initialising-->
+<script>
+    var map = L.map('mapid').setView([35.10418, -106.62987],10);
+    var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
+    x.addTo(map);
+</script>
+</body>
+</html>
