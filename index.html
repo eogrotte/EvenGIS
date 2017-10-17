@@ -3,15 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Evens Gis</title>
-    <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />-->
+    <!--Semantic UI CSS-->
+    <link rel="stylesheet" href="/public/stylesheets/semantic.css" />
     <!-- Leaflets CSS:-->
     <<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
+
+    <!--Scripts:-->
+    <!--Semantic UI JS-->
+    <script src="/public/javascripts/semantic.js"></script>
+    <!--guiElements:-->
+    <script src="/public/javascripts/guiElements.js"></script>
+    <!--jQUery-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 <body>
 <!-- Leaflets Javascript-fil: (maa alltid inn etter CSS)-->
-<!--<script src="http://cdn.leafletjs.com/leaflet-0.7.3/Leaflet"></script>-->
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
@@ -20,12 +32,46 @@
 <div id="mapid"style=" position: absolute;
   top: 0;
   bottom: 0;
-  width: 99%;"></div>
+  width: 99%;">
+    <div class="leaflet-top leaflet-left">
+        <button type="button" onclick="alert('Hello world!')">Click Me!</button>
+    </div>
+
+</div>
 <!-- Script initialising-->
+
+<script type="text/template" id="templateLogin">
+    <div class="ui styled accordion leaflet-control" style="width: 240px">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Logg inn
+        </div>
+        <div class="content">
+            <input id="username" class="ui input" type="text" placeholder="Brukernavn"><br/>
+            <input id="password" class="ui input" type="password" placeholder="Passord"><br/>
+            <button id="loginBtn" class="ui button">Logg på</button>
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i> Registrer bruker
+        </div>
+        <div class="content">
+            <input id="registerUsername" class="ui input" type="text" placeholder="Registrer brukernavn"><br/>
+            <input id="registerPassword" class="ui input" type="password" placeholder="Passord"><br/>
+            <input id="confirmPassword" class="ui input" type="password" placeholder="Bekreft passord"><br/>
+            <button id="createUser" class="ui button">Registrer bruker</button>
+        </div>
+        <div id="statusLogin"></div>
+    </div>
+</script>
+
 <script>
-    var map = L.map('mapid').setView([63.4269, 10.3969],13);
+    var map = L.map('mapid', {zoomControl: false}).setView([63.4269, 10.3969],13);
+    new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
 </script>
+
+
+
 </body>
 </html>
