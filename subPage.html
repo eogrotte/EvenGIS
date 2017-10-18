@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testPage</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-container">
+
+
+    <div class="w3-dark-grey w3-section" style="width:50%">
+        <button onclick="myFunction('Demo1')" class="w3-button w3-block">
+            Layers</button>
+        <div id="Demo1" class="w3-hide w3-container">
+            <p>Insert layers here</p>
+        </div>
+    </div>
+
+    <div class="w3-dark-grey w3-section" style="width:50%">
+        <button onclick="myFunction('Demo2')" class="w3-button w3-block">
+            Tools</button>
+        <div id="Demo2" class="w3-hide w3-container">
+            <p>Insert tools here</p>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+</body>
+</html>

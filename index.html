@@ -9,6 +9,8 @@
     <<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
+    <!--W3 School CSS:-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!--Scripts:-->
     <!--Semantic UI JS-->
@@ -33,44 +35,66 @@
   top: 0;
   bottom: 0;
   width: 99%;">
-    <div class="leaflet-top leaflet-left">
-        <button type="button" onclick="alert('Hello world!')">Click Me!</button>
-    </div>
 
 </div>
 <!-- Script initialising-->
 
-<script type="text/template" id="templateLogin">
-    <div class="ui styled accordion leaflet-control" style="width: 240px">
-        <div class="title">
-            <i class="dropdown icon"></i>
-            Logg inn
-        </div>
-        <div class="content">
-            <input id="username" class="ui input" type="text" placeholder="Brukernavn"><br/>
-            <input id="password" class="ui input" type="password" placeholder="Passord"><br/>
-            <button id="loginBtn" class="ui button">Logg på</button>
-        </div>
-        <div class="title">
-            <i class="dropdown icon"></i> Registrer bruker
-        </div>
-        <div class="content">
-            <input id="registerUsername" class="ui input" type="text" placeholder="Registrer brukernavn"><br/>
-            <input id="registerPassword" class="ui input" type="password" placeholder="Passord"><br/>
-            <input id="confirmPassword" class="ui input" type="password" placeholder="Bekreft passord"><br/>
-            <button id="createUser" class="ui button">Registrer bruker</button>
-        </div>
-        <div id="statusLogin"></div>
-    </div>
-</script>
+
 
 <script>
     var map = L.map('mapid', {zoomControl: false}).setView([63.4269, 10.3969],13);
     new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
+    map.addControl(new guiControl);
+
+    var guiControl = L.Control.extend({
+        onAdd: function(map) {
+            var controlElementTag = document.getElementById('wAccordion');
+            var controlElementClass = 'w3-container';
+            var guiHtml = L.DomUtil.create(controlElementTag, controlElementClass);
+
+            return guiHtml;
+        },
+        onRemove: function(map){
+            //Do nothing
+        }
+    });
+
+    map.addControl(new guiControl);
+
 </script>
 
+
+<div class="w3-container" id="wAccordion">
+
+    <div class="w3-dark-grey w3-section" style="width:50%">
+        <button onclick="myFunction('Demo1')" class="w3-button w3-block">
+            Layers</button>
+        <div id="Demo1" class="w3-hide w3-container">
+            <p>Insert layers here</p>
+        </div>
+    </div>
+
+    <div class="w3-dark-grey w3-section" style="width:50%">
+        <button onclick="myFunction('Demo2')" class="w3-button w3-block">
+            Tools</button>
+        <div id="Demo2" class="w3-hide w3-container">
+            <p>Insert tools here</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
 
 
 </body>
