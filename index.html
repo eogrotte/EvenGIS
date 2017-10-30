@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Evens Gis</title>
+    <title>Evens Gis - et prosjekt i TBA4251</title>
+    <meta name="description" content="Et prosjekt i TBA4251 - Programmering i geomatikk. Maalet er aa lage et enkelt GIS.">.
     <!--Semantic UI CSS-->
     <link rel="stylesheet" href="/public/stylesheets/semantic.css" />
     <!-- Leaflets CSS:-->
@@ -46,22 +47,28 @@
     new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
-    map.addControl(new guiControl);
+    this.guiControl;
 
     var guiControl = L.Control.extend({
-        onAdd: function(map) {
-            var controlElementTag = document.getElementById('wAccordion');
-            var controlElementClass = 'w3-container';
-            var guiHtml = L.DomUtil.create(controlElementTag, controlElementClass);
+        options: {
+            position: 'topleft'
+        },
 
-            return guiHtml;
+        onAdd: function(map) {
+            //Get HTML ELEMENT:
+            var controlElementTag = document.getElementById('testy');
+            //Get container (?!):
+            var $guiContainer = $(controlElementTag);
+            var controlElementClass = 'w3-container';
+            var guiHtml = L.DomUtil.create(controlElementTag, controlElementClass); //
+
+            return controlElementTag;
         },
         onRemove: function(map){
             //Do nothing
         }
     });
 
-    map.addControl(new guiControl);
 
 </script>
 
@@ -96,6 +103,9 @@
     }
 </script>
 
+<div class="test" id="testy" style="width:50%">
+    <button type="button">Click Me!</button>
+</div>
 
 </body>
 </html>
