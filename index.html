@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Evens Gis - et prosjekt i TBA4251</title>
-    <meta name="description" content="Et prosjekt i TBA4251 - Programmering i geomatikk. Maalet er aa lage et enkelt GIS.">.
+    <meta name="description" content="Et prosjekt i TBA4251 - Programmering i geomatikk. Maalet er aa lage et enkelt GIS.">
     <!--Semantic UI CSS-->
     <link rel="stylesheet" href="/public/stylesheets/semantic.css" />
+    <link rel="stylesheet" type="text/css" href="public/stylesheets/style.css"/>
     <!-- Leaflets CSS:-->
-    <<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
     <!--W3 School CSS:-->
@@ -30,13 +31,14 @@
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
+
 <!-- Start init map-->
 <!-- define mapBoundaries etc.-->
 <div id="mapid"style=" position: absolute;
-  top: 0;
+  top: 8%;
   bottom: 0;
-  width: 99%;">
-
+  z-index: -1;
+  width: 99%">
 </div>
 <!-- Script initialising-->
 
@@ -47,33 +49,15 @@
     new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
-    this.guiControl;
-
-    var guiControl = L.Control.extend({
-        options: {
-            position: 'topleft'
-        },
-
-        onAdd: function(map) {
-            //Get HTML ELEMENT:
-            var controlElementTag = document.getElementById('testy');
-            //Get container (?!):
-            var $guiContainer = $(controlElementTag);
-            var controlElementClass = 'w3-container';
-            var guiHtml = L.DomUtil.create(controlElementTag, controlElementClass); //
-
-            return controlElementTag;
-        },
-        onRemove: function(map){
-            //Do nothing
-        }
-    });
 
 
 </script>
 
 
-<div class="w3-container" id="wAccordion">
+<!--<div class="w3-container" id="wAccordion"style=" position: absolute;
+  top: 0;
+  bottom: 90%;
+  width: 100%;">
 
     <div class="w3-dark-grey w3-section" style="width:50%">
         <button onclick="myFunction('Demo1')" class="w3-button w3-block">
@@ -83,7 +67,7 @@
         </div>
     </div>
 
-    <div class="w3-dark-grey w3-section" style="width:50%">
+    <div class="w3-dark-grey w3-section" style= "left:50%; width:50%">
         <button onclick="myFunction('Demo2')" class="w3-button w3-block">
             Tools</button>
         <div id="Demo2" class="w3-hide w3-container">
@@ -101,11 +85,42 @@
             x.className = x.className.replace(" w3-show", "");
         }
     }
+</script>-->
+
+<div class="tab">
+    <button class="tablinks" style = "top: 0; width: 50%" onclick="openCity(event, 'London')">Layers</button>
+    <button class="tablinks" style ="top: 0; width: 50%" onclick="openCity(event, 'Paris')">Tools</button>
+</div>
+
+<div id="London" class="tabcontent">
+    <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+    <h3>Layers</h3>
+    <p>Here we will show the available layers, with perhaps a upload-function</p>
+
+</div>
+
+<div id="Paris" class="tabcontent">
+    <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+    <h3>Tools</h3>
+    <p>Here we will show the tools</p>
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 </script>
 
-<div class="test" id="testy" style="width:50%">
-    <button type="button">Click Me!</button>
-</div>
 
 </body>
 </html>
