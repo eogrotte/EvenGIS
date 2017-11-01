@@ -88,22 +88,48 @@
 </script>-->
 
 <div class="tab">
-    <button class="tablinks" style = "top: 0; width: 50%" onclick="openCity(event, 'London')">Layers</button>
-    <button class="tablinks" style ="top: 0; width: 50%" onclick="openCity(event, 'Paris')">Tools</button>
+    <button class="tablinks" style = "top: 0; width: 50%" onclick="openCity(event, 'Layers')">Layers</button>
+    <button class="tablinks" style ="top: 0; width: 50%" onclick="openCity(event, 'Tools')">Tools</button>
 </div>
 
-<div id="London" class="tabcontent">
+<div id="Layers" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Layers</h3>
     <p>Here we will show the available layers, with perhaps a upload-function</p>
 
 </div>
 
-<div id="Paris" class="tabcontent">
+<div id="Tools" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Tools</h3>
-    <p>Here we will show the tools</p>
+    <div class="verticalTab">
+        <button class="tablinks" onclick="openCity(event, 'Buffer')">Buffer</button>
+        <button class="tablinks" onclick="openCity(event, 'Difference')">Difference</button>
+        <button class="tablinks" onclick="openCity(event, 'Intersection')">Intersect</button>
+        <button class="tablinks" onclick="openCity(event, 'Union')">Union</button>
+    </div>
 </div>
+<!-- Start of tools-->
+<div id="Buffer" class="tabcontent">
+    <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+    <h3>Buffer</h3>
+</div>
+
+<div id="Difference" class="tabcontent">
+    <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+    <h3>Difference</h3>
+</div>
+
+<div id="Intersection" class="tabcontent">
+    <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+    <h3>Intersection</h3>
+</div>
+
+<div id="Union" class="tabcontent">
+    <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+    <h3>Union</h3>
+</div>
+<!-- End of tools-->
 
 <script>
     function openCity(evt, cityName) {
