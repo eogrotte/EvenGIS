@@ -38,7 +38,7 @@
   top: 8%;
   bottom: 0;
   z-index: -1;
-  width: 99%">
+  width: 100%">
 </div>
 <!-- Script initialising-->
 
@@ -88,8 +88,8 @@
 </script>-->
 
 <div class="tab">
-    <button class="tablinks" style = "top: 0; width: 50%" onclick="openCity(event, 'Layers')">Layers</button>
-    <button class="tablinks" style ="top: 0; width: 50%" onclick="openCity(event, 'Tools')">Tools</button>
+    <button class="tablinks" style = "top: 0; width: 50%; border: 2px solid #000000; border-bottom: none" onclick="openContent(event, 'Layers')">Layers</button>
+    <button class="tablinks" style = "top: 0; width: 50%; border: 2px solid #000000; border-bottom: none" onclick="openContent(event, 'Tools')">Tools</button>
 </div>
 
 <div id="Layers" class="tabcontent">
@@ -103,10 +103,10 @@
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Tools</h3>
     <div class="verticalTab">
-        <button class="tablinks" onclick="openCity(event, 'Buffer')">Buffer</button>
-        <button class="tablinks" onclick="openCity(event, 'Difference')">Difference</button>
-        <button class="tablinks" onclick="openCity(event, 'Intersection')">Intersect</button>
-        <button class="tablinks" onclick="openCity(event, 'Union')">Union</button>
+        <button class="tablinks" onclick="openContent(event, 'Buffer')">Buffer</button>
+        <button class="tablinks" onclick="openContent(event, 'Difference')">Difference</button>
+        <button class="tablinks" onclick="openContent(event, 'Intersection')">Intersect</button>
+        <button class="tablinks" onclick="openContent(event, 'Union')">Union</button>
     </div>
 </div>
 <!-- Start of tools-->
@@ -132,7 +132,7 @@
 <!-- End of tools-->
 
 <script>
-    function openCity(evt, cityName) {
+    function openContent(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
