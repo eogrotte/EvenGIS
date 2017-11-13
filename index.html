@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!--Scripts:-->
+    <!-- turf.js -->
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+    <!-- GeoJsons -->
+    <script src="testLayers/river.js"></script>
+    <script src="testLayers/churches.js"></script>
+    <script src="testLayers/arealbruk.js"></script>
     <!--Semantic UI JS-->
     <script src="/public/javascripts/semantic.js"></script>
     <!--guiElements:-->
@@ -24,6 +30,7 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="public/javascripts/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
 
 </head>
 <body>
@@ -41,8 +48,9 @@
   width: 100%">
 </div>
 <!-- Script initialising-->
-
-
+<script>
+    var bbox = turf.bbox(features);
+</script>
 
 <script>
     var map = L.map('mapid', {zoomControl: false}).setView([63.4269, 10.3969],13);
@@ -50,42 +58,20 @@
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
 
+    var point = turf.point([-90.548630, 14.616599]);
+    var buffered = turf.buffer(point, 500, {units: 'miles'});
+    L.geoJSON(buffered).addTo(map);
+
+    var dyrketMark = new L.GeoJSON.ajax("testLayers/Oslo_dyrka.geojson");
+    var geojsonLayer = new L.GeoJSON.AJAX("testLayers/Oslo_dyrka.geojson");
+    L.geoJSON(geojsonLayer).addTo(map);
+
+
 
 </script>
 
 
-<!--<div class="w3-container" id="wAccordion"style=" position: absolute;
-  top: 0;
-  bottom: 90%;
-  width: 100%;">
 
-    <div class="w3-dark-grey w3-section" style="width:50%">
-        <button onclick="myFunction('Demo1')" class="w3-button w3-block">
-            Layers</button>
-        <div id="Demo1" class="w3-hide w3-container">
-            <p>Insert layers here</p>
-        </div>
-    </div>
-
-    <div class="w3-dark-grey w3-section" style= "left:50%; width:50%">
-        <button onclick="myFunction('Demo2')" class="w3-button w3-block">
-            Tools</button>
-        <div id="Demo2" class="w3-hide w3-container">
-            <p>Insert tools here</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    function myFunction(id) {
-        var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
-</script>-->
 
 <div class="tab">
     <button class="tablinks" style = "top: 0; width: 50%; border: 2px solid #000000; border-bottom: none" onclick="openContent(event, 'Layers')">Layers</button>
@@ -109,6 +95,7 @@
         <button class="tablinks" onclick="openContent(event, 'Union')">Union</button>
     </div>
 </div>
+
 <!-- Start of tools-->
 <div id="Buffer" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
