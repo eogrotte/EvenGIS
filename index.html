@@ -21,6 +21,7 @@
     <script src="testLayers/river.js"></script>
     <script src="testLayers/churches.js"></script>
     <script src="testLayers/arealbruk.js"></script>
+    <script src="testLayers/Oslo_dyrka.js"></script>
     <!--Semantic UI JS-->
     <script src="/public/javascripts/semantic.js"></script>
     <!--guiElements:-->
@@ -57,6 +58,7 @@
     new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
+    new L.control.scale({imperial: false, maxWidth: 300}).addTo(map);
 
     var point = turf.point([-90.548630, 14.616599]);
     var buffered = turf.buffer(point, 500, {units: 'miles'});
@@ -65,6 +67,7 @@
     var dyrketMark = new L.GeoJSON.ajax("testLayers/Oslo_dyrka.geojson");
     var geojsonLayer = new L.GeoJSON.AJAX("testLayers/Oslo_dyrka.geojson");
     L.geoJSON(geojsonLayer).addTo(map);
+    L.geoJSON(oslo_dyrk).addTo(map);
 
 
 
