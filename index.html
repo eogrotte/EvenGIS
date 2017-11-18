@@ -14,18 +14,11 @@
     <!--W3 School CSS:-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <!--Scripts:-->
-    <!-- turf.js -->
-    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
-    <!-- GeoJsons -->
-    <script src="testLayers/river.js"></script>
-    <script src="testLayers/churches.js"></script>
-    <script src="testLayers/arealbruk.js"></script>
-    <script src="testLayers/Oslo_dyrka.js"></script>
+
     <!--Semantic UI JS-->
     <script src="/public/javascripts/semantic.js"></script>
-    <!--guiElements:-->
-    <script src="/public/javascripts/guiElements.js"></script>
+    <!-- turf.js -->
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
     <!--jQUery-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -39,6 +32,17 @@
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
         integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
         crossorigin=""></script>
+
+<!--Scripts: (was under head before)-->
+
+<!-- GeoJsons -->
+<script src="public/javascripts/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
+<script src="testLayers/river.js"></script>
+<script src="testLayers/churches.js"></script>
+<script src="testLayers/arealbruk.js"></script>
+<script src="testLayers/Oslo_dyrka.js"></script>
+<script src="testLayers/elvJavacsript.js"></script>
+<script src="testLayers/innsjoJS.js"></script>
 
 <!-- Start init map-->
 <!-- define mapBoundaries etc.-->
@@ -54,20 +58,40 @@
 </script>
 
 <script>
-    var map = L.map('mapid', {zoomControl: false}).setView([63.4269, 10.3969],13);
+    var map = L.map('mapid', {zoomControl: false}).setView([63.27386,10.45272],13);
     new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
-    new L.control.scale({imperial: false, maxWidth: 300}).addTo(map);
+    new L.control.scale({imperial: false, maxWidth: 300, position: 'bottomleft'}).addTo(map);
+
+
+//    var geojsonLayer = new L.GeoJSON.AJAX("./testLayers/Innsjo.json");
+//    L.geoJSON(geojsonLayer).addTo(map);
+    var innsjoLayer = new L.geoJSON(innsjoJS, {  style: {
+        weight: 4,
+        color: "red",
+        opacity: 1,
+        fillColor: "red",
+        fillOpacity: 0.5
+    }}).addTo(map);
+
+    var innsjoBuffer = turf.buffer(innsjoJS, 0.1, {units: 'miles'});
+    L.geoJSON(innsjoBuffer, {style: {weight: 4, color:"red"}}).addTo(map);
+
+    var elveLayer = new L.geoJSON(elvsomVariabel, { style: {
+        weight: 4,
+        color: "red",
+        opacity: 1,
+        fillColor: "red",
+        fillOpacity: 0.5
+        }
+    }).addTo(map);
 
     var point = turf.point([-90.548630, 14.616599]);
     var buffered = turf.buffer(point, 500, {units: 'miles'});
     L.geoJSON(buffered).addTo(map);
 
-    var dyrketMark = new L.GeoJSON.ajax("testLayers/Oslo_dyrka.geojson");
-    var geojsonLayer = new L.GeoJSON.AJAX("testLayers/Oslo_dyrka.geojson");
-    L.geoJSON(geojsonLayer).addTo(map);
-    L.geoJSON(oslo_dyrk).addTo(map);
+
 
 
 
