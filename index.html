@@ -48,7 +48,7 @@
         crossorigin=""></script>
 
 <!--Scripts: (was under head before)-->
-
+<script src="public/javascripts/calculations.js"></script>
 <!-- GeoJsons -->
 <script src="testLayers/river.js"></script>
 <script src="testLayers/churches.js"></script>
@@ -97,9 +97,9 @@
 //    }});
 //    innsjoAjaxLayer.addTo(map);
 
-
-    var innsjoBuffer = turf.buffer(innsjoJS, 0.1, {units: 'miles'});
-    L.geoJSON(innsjoBuffer, {style: {weight: 4, color:"red"}}).addTo(map);
+//Fungerende innsjoboffer:
+//    var innsjoBuffer = turf.buffer(innsjoJS, 0.1, {units: 'miles'});
+//    L.geoJSON(innsjoBuffer, {style: {weight: 4, color:"red"}}).addTo(map);
 
     var elveLayer = new L.geoJSON(elvsomVariabel, { style: {
         weight: 4,
@@ -109,11 +109,6 @@
         fillOpacity: 0.5
         }
     }).addTo(map);
-
-    innsjoBuffer.setStyle({
-        color: "blue"
-    });
-
 
 
 
@@ -170,9 +165,8 @@
         <span class="validity"></span>
     </div>
     <div>
-        <input type="button" value="Calculate buffer!">
+        <input type="button" id="bufferDistanceButton" value="Calculate buffer!" onclick="calculateBuffer()">
     </div>
-
 </div>
 
 <div id="Difference" class="tabcontent">
