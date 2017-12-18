@@ -13,7 +13,8 @@
           crossorigin=""/>
     <!--W3 School CSS:-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+    <!-- Dropdown-menu:-->
+    <link rel="stylesheet" href="/public/stylesheets/dropdown-menu.css"/>
 
     <!--Semantic UI JS-->
     <script src="/public/javascripts/semantic.js"></script>
@@ -25,6 +26,19 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="public/javascripts/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
+    <style>
+        #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+        #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+        #sortable li span { position: absolute; margin-left: -1.3em; }
+    </style>
+    <script>
+        $( function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        } );
+    </script>
+    <!-- end jQuery-->
+
 
 </head>
 <body>
@@ -36,18 +50,21 @@
 <!--Scripts: (was under head before)-->
 
 <!-- GeoJsons -->
-<script src="public/javascripts/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
 <script src="testLayers/river.js"></script>
 <script src="testLayers/churches.js"></script>
 <script src="testLayers/arealbruk.js"></script>
 <script src="testLayers/Oslo_dyrka.js"></script>
 <script src="testLayers/elvJavacsript.js"></script>
 <script src="testLayers/innsjoJS.js"></script>
+<script src="public/javascripts/layerStyles.js"></script>
+<script src="public/javascripts/dragableList.js"></script>
+
+
 
 <!-- Start init map-->
 <!-- define mapBoundaries etc.-->
 <div id="mapid"style=" position: absolute;
-  top: 8%;
+  top: 41px;
   bottom: 0;
   z-index: -1;
   width: 100%">
@@ -65,15 +82,21 @@
     new L.control.scale({imperial: false, maxWidth: 300, position: 'bottomleft'}).addTo(map);
 
 
-//    var geojsonLayer = new L.GeoJSON.AJAX("./testLayers/Innsjo.json");
-//    L.geoJSON(geojsonLayer).addTo(map);
-    var innsjoLayer = new L.geoJSON(innsjoJS, {  style: {
-        weight: 4,
-        color: "red",
-        opacity: 1,
-        fillColor: "red",
-        fillOpacity: 0.5
-    }}).addTo(map);
+
+    //The "stupid" way of doing it:
+    var innsjoLayer = new L.geoJSON(innsjoJS, { style: waterStyle}).addTo(map);
+
+    //The "clever"/ajax-way of doing it:
+
+//    var innsjoAjaxLayer = new L.geoJSON("testLayers/Innsjo.geojson", {style:{
+//        weight: 4,
+//        color: "red",
+//        opacity: 1,
+//        fillColor: "red",
+//        fillOpacity: 0.5
+//    }});
+//    innsjoAjaxLayer.addTo(map);
+
 
     var innsjoBuffer = turf.buffer(innsjoJS, 0.1, {units: 'miles'});
     L.geoJSON(innsjoBuffer, {style: {weight: 4, color:"red"}}).addTo(map);
@@ -87,17 +110,15 @@
         }
     }).addTo(map);
 
-    var point = turf.point([-90.548630, 14.616599]);
-    var buffered = turf.buffer(point, 500, {units: 'miles'});
-    L.geoJSON(buffered).addTo(map);
+    innsjoBuffer.setStyle({
+        color: "blue"
+    });
 
 
 
 
 
 </script>
-
-
 
 
 <div class="tab">
@@ -108,7 +129,16 @@
 <div id="Layers" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Layers</h3>
-    <p>Here we will show the available layers, with perhaps a upload-function</p>
+    <ul id="sortable">
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+    </ul>
+
 
 </div>
 
@@ -127,6 +157,22 @@
 <div id="Buffer" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Buffer</h3>
+    <span class="custom-dropdown custom-dropdown--white">
+        <select class="custom-dropdown__select custom-dropdown__select--white">
+            <option>Layer 1</option>
+            <option>Layer 2</option>
+            <option>Layer 3</option>
+        </select>
+    </span>
+    <div>
+        <label for="bufferDistance">Buffer distance (m): </label>
+        <input id="bufferDistance" type="number" name="bufferDistance" min="0" max="100000" required>
+        <span class="validity"></span>
+    </div>
+    <div>
+        <input type="button" value="Calculate buffer!">
+    </div>
+
 </div>
 
 <div id="Difference" class="tabcontent">
@@ -146,7 +192,7 @@
 <!-- End of tools-->
 
 <script>
-    function openContent(evt, cityName) {
+    function openContent(evt, tabID) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -156,9 +202,10 @@
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        document.getElementById(cityName).style.display = "block";
+        document.getElementById(tabID).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
 </script>
 
 

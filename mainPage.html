@@ -5,7 +5,8 @@
     <title>Evens Gis</title>
     <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />-->
     <!-- Leaflets CSS:-->
-    <<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    <
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
 </head>
@@ -17,15 +18,59 @@
         crossorigin=""></script>
 <!-- Start init map-->
 <!-- define mapBoundaries etc.-->
-<div id="mapid"style=" position: absolute;
+<div id="mapid" style=" position: absolute;
   top: 0;
   bottom: 0;
   width: 99%;"></div>
 <!-- Script initialising-->
 <script>
-    var map = L.map('mapid').setView([35.10418, -106.62987],10);
+    var map = L.map('mapid').setView([35.10418, -106.62987], 10);
     var x = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
     x.addTo(map);
 </script>
+<li class="ui-state-default" id="129">
+    <table id="layerBox">
+        <tr class="layerdiv no-swipe group handle instant " style="background-color: grey; display: none;">
+            <td class="layerp" id="129name">Vann_buffer50</td>
+            <td><span class="glyphicon glyphicon-search layer" title="Go to layer"></span></td>
+            <td><span id="129hideshow" class="glyphicon glyphicon-eye-open hideshowLayer layer"
+                      title="Hide layer"></span></td>
+            <td><span class="glyphicon  glyphicon-pencil changeName layer" title="Edit layer" id="129edit"></span></td>
+        </tr>
+    </table>
+</li>
+<li class="ui-state-default ui-sortable-handle" id="69" style="">
+    <table id="layerBox">
+        <tr class="layerdiv no-swipe group handle instant ">
+            <td class="layerp" id="69name">Vei</td>
+            <td><span class="glyphicon glyphicon-search layer" title="Go to layer"></span></td>
+            <td><span id="69hideshow" class="glyphicon glyphicon-eye-close hideshowLayer layer"
+                      title="Show layer"></span></td>
+            <td><span class="glyphicon  glyphicon-pencil changeName layer" title="Edit layer" id="69edit"></span></td>
+        </tr>
+    </table>
+</li>
+<li class="ui-state-default ui-sortable-handle" id="67">
+    <table id="layerBox">
+        <tr class="layerdiv no-swipe group handle instant ">
+            <td class="layerp" id="67name">Arealbruk</td>
+            <td><span class="glyphicon glyphicon-search layer" title="Go to layer"></span></td>
+            <td><span id="67hideshow" class="glyphicon glyphicon-eye-close hideshowLayer layer"
+                      title="Show layer"></span></td>
+            <td><span class="glyphicon  glyphicon-pencil changeName layer" title="Edit layer" id="67edit"></span></td>
+        </tr>
+    </table>
+</li>
+<li class="ui-state-default ui-sortable-handle" id="70" style="">
+    <table id="layerBox">
+        <tr class="layerdiv no-swipe group handle instant ">
+            <td class="layerp" id="70name">Vann</td>
+            <td><span class="glyphicon glyphicon-search layer" title="Go to layer"></span></td>
+            <td><span id="70hideshow" class="glyphicon hideshowLayer layer glyphicon-eye-open"
+                      title="Hide layer"></span></td>
+            <td><span class="glyphicon  glyphicon-pencil changeName layer" title="Edit layer" id="70edit"></span></td>
+        </tr>
+    </table>
+</li>
 </body>
 </html>
