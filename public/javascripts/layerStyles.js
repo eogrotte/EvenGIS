@@ -12,3 +12,11 @@ var roadStyle = {
     fillColor: "#686868",
     fillOpacity: 0.5
 };
+
+var brownStyle = {
+    weight: 4,
+    color: "#9c8a22",
+    opacity: 1,
+    fillColor: "#686868",
+    fillOpacity: 0.5
+};

@@ -49,8 +49,13 @@
 
 <!--Scripts: (was under head before)-->
 <script src="public/javascripts/calculations.js"></script>
+<script src="public/javascripts/layersAndUpdates.js"></script>
 <!-- GeoJsons -->
 <script src="testLayers/river.js"></script>
+<script src="RennebuLayers/byggRennebuJs.js"></script>
+<script src="testLayers/data/arealbrukJS.js"></script>
+<script src="testLayers/data/vannJS.js"></script>
+<script src="RennebuLayers/vegJS.js"></script>
 <script src="testLayers/churches.js"></script>
 <script src="testLayers/arealbruk.js"></script>
 <script src="testLayers/Oslo_dyrka.js"></script>
@@ -82,9 +87,21 @@
     new L.control.scale({imperial: false, maxWidth: 300, position: 'bottomleft'}).addTo(map);
 
 
+    var layersArray = [];
+    layersArray[0] = innsjoJS;
+    layersArray[1] = arealbrukJS;
+    layersArray[2] = vannJS;
 
-    //The "stupid" way of doing it:
-    var innsjoLayer = new L.geoJSON(innsjoJS, { style: waterStyle}).addTo(map);
+    var layerNames = [];
+    layerNames[0] = "Water";
+    layerNames[1] = "Roads";
+    layerNames[2] = "Land use";
+
+    //var veiRennebu = new L.geoJSON(vegJS, {style: waterStyle}).addTo(map);
+
+    //The "stupid" way of doing it (works!):
+    //var innsjoLayer = new L.geoJSON(innsjoJS, { style: waterStyle}).addTo(map);
+    drawLayers(layersArray);
 
     //The "clever"/ajax-way of doing it:
 
@@ -109,8 +126,6 @@
         fillOpacity: 0.5
         }
     }).addTo(map);
-
-
 
 
 </script>
@@ -152,17 +167,18 @@
 <div id="Buffer" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Buffer</h3>
-    <span class="custom-dropdown custom-dropdown--white">
-        <select class="custom-dropdown__select custom-dropdown__select--white">
-            <option>Layer 1</option>
-            <option>Layer 2</option>
-            <option>Layer 3</option>
-        </select>
-    </span>
+    <select id="bufferLayers">
+        <option value=" ">Select layer </option>
+        <option value="Innsjo">Innsjoer</option>
+    </select>
     <div>
         <label for="bufferDistance">Buffer distance (m): </label>
-        <input id="bufferDistance" type="number" name="bufferDistance" min="0" max="100000" required>
+        <input id="bufferDistance" type="number" name="bufferDistance" placeholder="0-1000000" min="0" max="1000000" required>
         <span class="validity"></span>
+    </div>
+    <div>
+        <label for="bufferName">Choose a name for the buffer layer: </label>
+        <input type="text" id="bufferName" name="name">
     </div>
     <div>
         <input type="button" id="bufferDistanceButton" value="Calculate buffer!" onclick="calculateBuffer()">
@@ -172,6 +188,35 @@
 <div id="Difference" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Difference</h3>
+    <select id="differenceLayersOne">
+    </select>
+    <select id="differenceLayersTwo">
+    </select>
+
+    <div>
+        <label for="differenceLayerName">Choose a name for the new difference layer: </label>
+        <input type="text" id="differenceLayerName" placeholder="difference" name="name">
+    </div>
+
+    <div>
+        <input type="button" id="differenceButton" value="Calculate difference!" onclick="calculateDifference()">
+    </div>
+
+
+    <script>
+        document.getElementById('differenceLayerName').value = "difference";
+        var selectDifference = document.getElementById("differenceLayersOne");
+        var selectDifferenceTwo = document.getElementById("differenceLayersTwo");
+        for (var i=0; i<layersArray.length; i++){
+            if (i==0){
+                selectDifference.options[selectDifference.options.length] = new Option("Select first layer");
+                selectDifferenceTwo.options[selectDifferenceTwo.options.length] = new Option("Select second layer");
+            }
+            selectDifference.options[selectDifference.options.length] = new Option(layerNames[i], layersArray[i]);
+            selectDifferenceTwo.options[selectDifferenceTwo.options.length] = new Option(layerNames[i], layersArray[i]);
+        }
+    </script>
+
 </div>
 
 <div id="Intersection" class="tabcontent">
