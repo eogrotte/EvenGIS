@@ -18,9 +18,11 @@ function calculateDifference() {
 
     var layerOne = document.getElementById('differenceLayersOne').value;
     var layerTwo = document.getElementById('differenceLayersTwo').value;
-    var tempDifferenceName = document.getElementById("differenceLayerName");
+    var tempDifferenceName = document.getElementById("differenceLayerName").value;
+
     if (tempDifferenceName=="difference"){
-        alert("alarm!");
+        tempDifferenceName = tempDifferenceName + (Math.floor(Math.random() * 10000) + 1).toString();
+        alert(tempDifferenceName);
     }
 
     if (layerOne != 0 && layerTwo != 0){
@@ -30,18 +32,42 @@ function calculateDifference() {
         }
         else {
             layersArray.push(difference);
-            if (tempDifferenceName != "difference"){
-                layerNames.push(tempDifferenceName);
-            }
-            if (tempDifferenceName == "difference"){
-                layerNames.push("difference" + (Math.floor(Math.random() * 1000) + 1).toString());
-            }
+            layerNames.push(tempDifferenceName);
         }
     }
     else {
         alert("Cannot compute difference. One or both of the layers are empty.");
     }
+}
+
+function calculateIntersection(){
+
+    var intersectLayerOne = document.getElementById("intersectionLayerOne");
+    var intersectLayerOne = document.getElementById("intersectionLayerTwo");
+    var indexOne = intersectLayerOne.selectedIndex;
+    var indexTwo = intersectLayerOne.selectedIndex;
+
+    alert("test1");
+
+    var intersectName = document.getElementById("intersectionLayerName").value;
 
 
+    var intersected = turf.intersect(layersArray[indexOne-1], layersArray[indexTwo-1]);
 
+    layersArray.push(intersected);
+    layersName.push(intersectName);
+    addToMap(intersected);
+}
+
+function addToMap(layerTemp){
+    alert("test2");
+    var colour = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    var tempStyle = {
+        "color": color,
+        "fillColor": color,
+        "weight": 1,
+        "opacity": 0.8,
+        "fillOpacity": 0.7,
+    };
+    L.geoJson(layerTemp, {style: tempStyle}).addTo(map);
 }
