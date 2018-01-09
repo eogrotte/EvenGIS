@@ -43,9 +43,9 @@ function calculateDifference() {
 function calculateIntersection(){
 
     var intersectLayerOne = document.getElementById("intersectionLayerOne");
-    var intersectLayerOne = document.getElementById("intersectionLayerTwo");
+    var intersectLayerTwo = document.getElementById("intersectionLayerTwo");
     var indexOne = intersectLayerOne.selectedIndex;
-    var indexTwo = intersectLayerOne.selectedIndex;
+    var indexTwo = intersectLayerTwo.selectedIndex;
 
     alert("test1");
 
@@ -57,6 +57,16 @@ function calculateIntersection(){
     layersArray.push(intersected);
     layersName.push(intersectName);
     addToMap(intersected);
+}
+
+function calculateUnion(){
+    var unionLayerOne = document.getElementById("unionLayerOne");
+    var unionLayerTwo = document.getElementById("unionLayerTwo");
+    var indexOne = unionLayerOne.selectedIndex;
+    var indexTwo = unionLayerTwo.selectedIndex;
+    var unionLayer = turf.union(layerArray[indexOne-1], layerArray[indexTwo-1])
+
+    addToMap(unionLayer);
 }
 
 function addToMap(layerTemp){

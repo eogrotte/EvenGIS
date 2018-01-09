@@ -256,6 +256,35 @@
 <div id="Union" class="tabcontent">
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Union</h3>
+
+    <select id="unionLayerOne">
+    </select>
+    <select id="unionLayerTwo">
+    </select>
+
+    <div>
+        <label for="unionLayerName">Choose a name for the new layer: </label>
+        <input type="text" id="unionLayerName" name="name">
+    </div>
+
+    <div>
+        <input type="button" id="unionButton" value="Calculate union!" onclick="calculateUnion()">
+    </div>
+
+    <script>
+        document.getElementById('unionLayerName').value = "union";
+        var selectUnion = document.getElementById("unionLayerOne");
+        var selectUnionTwo = document.getElementById("unionLayerTwo");
+        for (var i=0; i<layersArray.length; i++){
+            if (i==0){
+                selectUnion.options[selectUnion.options.length] = new Option("Select first layer");
+                selectUnionTwo.options[selectUnionTwo.options.length] = new Option("Select second layer");
+            }
+            selectUnion.options[selectUnion.options.length] = new Option(layerNames[i], layersArray[i]);
+            selectUnionTwo.options[selectUnionTwo.options.length] = new Option(layerNames[i], layersArray[i]);
+        }
+    </script>
+
 </div>
 <!-- End of tools-->
 
