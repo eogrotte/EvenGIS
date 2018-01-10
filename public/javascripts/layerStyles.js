@@ -7,9 +7,9 @@ var waterStyle = {
 };
 var roadStyle = {
     weight: 4,
-    color: "#000000",
+    color: "#5b5b5b",
     opacity: 1,
-    fillColor: "#686868",
+    fillColor: "#919191",
     fillOpacity: 0.5
 };
 

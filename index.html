@@ -142,6 +142,27 @@
     <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
     <h3>Layers</h3>
 
+    <select id="layerControl">
+    </select>
+
+    <select id="layerAction">
+        <option value="Select Action">Select Action</option>
+        <option value="Delete">Delete</option>
+        <option value="Download">Download</option>
+        <option value="Hide">Hide</option>
+        <option value="Edit">Edit colour</option>
+    </select>
+
+    <input type="button" id="actionButton" value="Execute Action!">
+
+    <script>;
+        var selectLayer = document.getElementById("layerControl");
+        for (var i = 0; i < layersArray.length; i++) {
+            if (i == 0) {
+                selectLayer.options[selectLayer.options.length] = new Option("Select layer");
+            }
+            selectLayer.options[selectLayer.options.length] = new Option(layerNames[i], layersArray[i]);
+        }</script>
 
 </div>
 
