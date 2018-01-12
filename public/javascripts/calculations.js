@@ -11,7 +11,8 @@ function calculateBuffer() {
     layersArray.push(innsjoBuffer);
     layerNames.push(bufferName);
 
-    L.geoJson(innsjoBuffer, {style: {weight: 4, color:"red"}}).addTo(map);
+    addToMap(innsjoBuffer, bufferName);
+
 }
 
 function calculateDifference() {
@@ -69,12 +70,14 @@ function calculateUnion(){
     addToMap(unionLayer);
 }
 
-function addToMap(layerTemp){
-    alert("test2");
+function addToMap(layerTemp, layerNameTemp){
+    layersArray.push(layerTemp);
+    layerNames.push(layerNameTemp);
+    //updateLayers(layersArray, layerNames);
     var colour = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
     var tempStyle = {
-        "color": color,
-        "fillColor": color,
+        "color": colour,
+        "fillColor": colour,
         "weight": 1,
         "opacity": 0.8,
         "fillOpacity": 0.7,

@@ -14,6 +14,13 @@ function drawLayers(tempLayersArray){
     }
 }
 
-function addLayer(tempLayer){
+function updateLayers(layersName, layersArray){
+    var selectBufferUpdate = document.getElementById("bufferLayers");
+    for (var i = 0; i < layersArray.length; i++) {
+        if (i == 0) {
+            selectBufferUpdate.options[selectBufferUpdate.options.length] = new Option("Select layer");
+        }
+        selectBufferUpdate.options[selectBufferUpdate.options.length] = new Option(layerNames[i], layersArray[i]);
+    }
 
 }
