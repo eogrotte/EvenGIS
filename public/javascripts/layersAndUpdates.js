@@ -14,13 +14,35 @@ function drawLayers(tempLayersArray){
     }
 }
 
-function updateLayers(layersName, layersArray){
+function addLayerToLists(layerName, layer){
+    //This is a method that adds a new layer to all the lists.
     var selectBufferUpdate = document.getElementById("bufferLayers");
-    for (var i = 0; i < layersArray.length; i++) {
-        if (i == 0) {
-            selectBufferUpdate.options[selectBufferUpdate.options.length] = new Option("Select layer");
-        }
-        selectBufferUpdate.options[selectBufferUpdate.options.length] = new Option(layerNames[i], layersArray[i]);
-    }
+    var selectLayer = document.getElementById("layerControl");
+    var selectDifference = document.getElementById("differenceLayersOne");
+    var selectDifferenceTwo = document.getElementById("differenceLayersTwo");
+    var selectIntersection = document.getElementById("intersectionLayerOne");
+    var selectIntersectionTwo = document.getElementById("intersectionLayerTwo");
+    var selectUnion = document.getElementById("unionLayerOne");
+    var selectUnionTwo = document.getElementById("unionLayerTwo");
 
+
+
+    selectBufferUpdate.options[selectBufferUpdate.options.length] = new Option(layerName, layer);
+    selectLayer.options[selectLayer.options.length] = new Option(layerName, layer);
+    selectDifference.options[selectDifference.options.length] = new Option(layerName, layer);
+    selectDifferenceTwo.options[selectDifference.options.length] = new Option(layerName, layer);
+    selectIntersection.options[selectIntersection.options.length] = new Option(layerName, layer);
+    selectIntersectionTwo.options[selectIntersectionTwo.options.length] = new Option(layerName, layer);
+    selectUnion.options[selectUnion.options.length] = new Option(layerName, layer)
+    selectUnionTwo.options[selectUnionTwo.options.length] = new Option(layerName, layer);
+
+
+
+}
+
+function removeLayer(name, layer){
+    var selectBufferUpdate = document.getElementById("bufferLayers");
+    while (selectBufferUpdate.options.length) {
+        obj.remove(0);
+    }
 }

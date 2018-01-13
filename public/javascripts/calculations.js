@@ -73,7 +73,7 @@ function calculateUnion(){
 function addToMap(layerTemp, layerNameTemp){
     layersArray.push(layerTemp);
     layerNames.push(layerNameTemp);
-    //updateLayers(layersArray, layerNames);
+    addLayerToLists(layerNameTemp, layerTemp);
     var colour = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
     var tempStyle = {
         "color": colour,
