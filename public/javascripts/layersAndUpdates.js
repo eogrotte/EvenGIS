@@ -76,15 +76,25 @@ function layerAction(){
 
 function downloadLayer(layerIndex){
     //window.open('testLayers/data/vann.geojson');
-    // var json = layerArray[layerIndex].toGeoJSON();
-    //
-    // var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json))
-    var path= "testLayers/data/vann.geojson";
-    var save = document.createElement('a');
-    save.href = path;
-    save.download = "vann.geojson";
-    save.target = '_blank';
-    document.body.appendChild(save);
-    save.click();
+    var json = layerArray[layerIndex].toGeoJSON();
+
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
+
+    //var path= "testLayers/data/vann.geojson";
+    // var save = document.createElement('a');
+    // save.href = dataStr;
+    // save.download = layerNames[layerIndex];
+    // save.target = '_blank';
+    // document.body.appendChild(save);
+    // save.click();
+    // document.body.removeChild(save);
+
+
+    var dlAnchorElem = document.createElement('downloadLayer');
+    dlAnchorElem.href=dataStr;
+    dlAnchorElem.download = layerNames[layerIndex] + ".geojson";
+    dlAnchorElem.target='_blank';
+    document.body.appendChild(dlAnchorElem);
+    dlAnchorElem.click();
     document.body.removeChild(save);
 }
