@@ -6,7 +6,7 @@ function drawLayers(tempLayersArray){
             //tmp.setStyle(brownStyle);
         }
         if (i==1 || i==3 || i==5){
-            //var tempX = new L.geoJson(tempLayersArray[i], {style: brownStyle}).addTo(map);
+            var tempX = new L.geoJson(tempLayersArray[i], {style: brownStyle}).addTo(map);
         }
         if (i==2){
             var temp2 = new L.geoJson(tempLayersArray[i], {style: roadStyle}).addTo(map);
@@ -36,13 +36,55 @@ function addLayerToLists(layerName, layer){
     selectUnion.options[selectUnion.options.length] = new Option(layerName, layer)
     selectUnionTwo.options[selectUnionTwo.options.length] = new Option(layerName, layer);
 
+}
 
+function deleteLayer(index){
+
+    var selectBufferUpdate = document.getElementById("bufferLayers");
+    var selectLayer = document.getElementById("layerControl");
+    var selectDifference = document.getElementById("differenceLayersOne");
+    var selectDifferenceTwo = document.getElementById("differenceLayersTwo");
+    var selectIntersection = document.getElementById("intersectionLayerOne");
+    var selectIntersectionTwo = document.getElementById("intersectionLayerTwo");
+    var selectUnion = document.getElementById("unionLayerOne");
+    var selectUnionTwo = document.getElementById("unionLayerTwo");
+
+    alert("test");
+    selectBufferUpdate.remove(index);
+    selectLayer.remove(index);
+    selectDifference.remove(index);
+    selectDifferenceTwo.remove(index);
+    selectIntersection.remove(index);
+    selectIntersectionTwo.remove(index);
+    selectUnion.remove(index);
+    selectUnionTwo.remove(index);
+}
+
+function layerAction(){
+    var selectedLayerIndex = document.getElementById("layerControl").selectedIndex;
+    var actionIndex = document.getElementById("layerAction").selectedIndex;
+
+    //actionIndex of 0 does nothing, 1 deletes layer, 2 downloads layer, 3 hides, 4 edits (appearance)
+    if (actionIndex === 1){
+        deleteLayer(selectedLayerIndex);
+    }
+    if (actionIndex == 2){
+        downloadLayer(selectedLayerIndex);
+    }
 
 }
 
-function removeLayer(name, layer){
-    var selectBufferUpdate = document.getElementById("bufferLayers");
-    while (selectBufferUpdate.options.length) {
-        obj.remove(0);
-    }
+function downloadLayer(layerIndex){
+    //window.open('testLayers/data/vann.geojson');
+    // var json = layerArray[layerIndex].toGeoJSON();
+    //
+    // var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json))
+    var path= "testLayers/data/vann.geojson";
+    var save = document.createElement('a');
+    save.href = path;
+    save.download = "vann.geojson";
+    save.target = '_blank';
+    document.body.appendChild(save);
+    save.click();
+    document.body.removeChild(save);
 }
