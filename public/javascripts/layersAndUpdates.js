@@ -1,16 +1,24 @@
 function drawLayers(tempLayersArray){
     for (i=0; i<tempLayersArray.length; i++){
         if (i==0 || i==4 || i==6){
-            var tmp = new L.geoJson(tempLayersArray[i], {style: waterStyle}).addTo(map);
+            var layerZero = L.geoJson(tempLayersArray[i], {style: waterStyle});
+            layerVars.push(layerZero);
+            layerVars[i].addTo(map);
+            //map.removeLayer(layerZero);
             //var innsjoLayer = new L.geoJSON(innsjoJS, { style: waterStyle}).addTo(map);
             //tmp.setStyle(brownStyle);
         }
         if (i==1 || i==3 || i==5){
-            var tempX = new L.geoJson(tempLayersArray[i], {style: brownStyle}).addTo(map);
+            var tempX = L.geoJson(tempLayersArray[i], {style: brownStyle});
+            layerVars.push(tempX);
+            layerVars[i].addTo(map);
         }
         if (i==2){
             var temp2 = new L.geoJson(tempLayersArray[i], {style: roadStyle}).addTo(map);
+            layerVars.push(temp2);
+            layerVars[i].addTo(map);
         }
+
     }
 }
 
@@ -49,7 +57,6 @@ function deleteLayer(index){
     var selectUnion = document.getElementById("unionLayerOne");
     var selectUnionTwo = document.getElementById("unionLayerTwo");
 
-    alert("test");
     selectBufferUpdate.remove(index);
     selectLayer.remove(index);
     selectDifference.remove(index);
@@ -58,6 +65,14 @@ function deleteLayer(index){
     selectIntersectionTwo.remove(index);
     selectUnion.remove(index);
     selectUnionTwo.remove(index);
+
+    layersArray.splice(index, 1);
+    layerNames.splice(index, 1);
+
+    //map.removeLayer(L.temp2);
+    map.removeLayer(layerVars[index-1]);
+
+
 }
 
 function layerAction(){

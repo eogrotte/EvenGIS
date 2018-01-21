@@ -99,35 +99,14 @@
     layerNames[1] = "land use";
     layerNames[2] = "Roads";
 
+    var layerVars = [];
+
+
     //var veiRennebu = new L.geoJSON(vegJS, {style: waterStyle}).addTo(map);
 
     //The "stupid" way of doing it (works!):
     //var innsjoLayer = new L.geoJSON(innsjoJS, { style: waterStyle}).addTo(map);
     drawLayers(layersArray);
-
-    //The "clever"/ajax-way of doing it:
-
-//    var innsjoAjaxLayer = new L.geoJSON("testLayers/Innsjo.geojson", {style:{
-//        weight: 4,
-//        color: "red",
-//        opacity: 1,
-//        fillColor: "red",
-//        fillOpacity: 0.5
-//    }});
-//    innsjoAjaxLayer.addTo(map);
-
-//Fungerende innsjoboffer:
-//    var innsjoBuffer = turf.buffer(innsjoJS, 0.1, {units: 'miles'});
-//    L.geoJSON(innsjoBuffer, {style: {weight: 4, color:"red"}}).addTo(map);
-
-    var elveLayer = new L.geoJSON(elvsomVariabel, { style: {
-        weight: 4,
-        color: "red",
-        opacity: 1,
-        fillColor: "red",
-        fillOpacity: 0.5
-        }
-    }).addTo(map);
 
 
 </script>
