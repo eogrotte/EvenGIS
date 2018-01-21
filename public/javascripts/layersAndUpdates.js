@@ -66,11 +66,11 @@ function deleteLayer(index){
     selectUnion.remove(index);
     selectUnionTwo.remove(index);
 
-    layersArray.splice(index, 1);
-    layerNames.splice(index, 1);
-
-    //map.removeLayer(L.temp2);
     map.removeLayer(layerVars[index-1]);
+
+    layersArray.splice(index-1, 1);
+    layerNames.splice(index-1, 1);
+    layerVars.splice(index-1, 1);
 
 
 }
@@ -85,6 +85,9 @@ function layerAction(){
     }
     if (actionIndex == 2){
         downloadLayer(selectedLayerIndex);
+    }
+    if (actionIndex == 3){
+        hideLayer(selectedLayerIndex);
     }
 
 }
@@ -112,4 +115,15 @@ function downloadLayer(layerIndex){
     document.body.appendChild(dlAnchorElem);
     dlAnchorElem.click();
     document.body.removeChild(save);
+}
+
+function hideLayer(index){
+    if (hidden[index-1] == true){
+        layerVars[index-1].addTo(map);
+        hidden.splice(index-1, 1);
+        return;
+    }
+    var layerAct = document.getElementById("layerAction");
+    map.removeLayer(layerVars[index-1]);
+    hidden[index-1]=true;
 }
