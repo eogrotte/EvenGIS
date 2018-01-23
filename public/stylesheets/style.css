@@ -118,4 +118,20 @@ div.verticalTab button.active {
   background-color: #ccc;
 }
 
-/*Dragable items*/
+/*Start colour-popup*/
+
+.thing {
+}
+.thing2 {
+  opacity: 0;
+}
+.m-fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+.m-fadeIn {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}

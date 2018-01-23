@@ -89,6 +89,9 @@ function layerAction(){
     if (actionIndex == 3){
         hideLayer(selectedLayerIndex);
     }
+    if (actionIndex == 4){
+        editAppearance(selectedLayerIndex);
+    }
 
 }
 
@@ -126,4 +129,25 @@ function hideLayer(index){
     var layerAct = document.getElementById("layerAction");
     map.removeLayer(layerVars[index-1]);
     hidden[index-1]=true;
+}
+
+function editAppearance(index){
+
+    thing.classList.toggle("m-fadeOut");
+    thing2.classList.toggle("m-fadeIn");
+}
+
+
+function changeColour(colour){
+    var tempStyle = {
+        "color": colour,
+        "fillColor": colour,
+        "weight": 1,
+        "opacity": 0.8,
+        "fillOpacity": 0.7,
+    };
+
+    var selectedLayerIndex = document.getElementById("layerControl").selectedIndex;
+    layerVars[selectedLayerIndex-1].setStyle(tempStyle);
+    editAppearance(0);
 }

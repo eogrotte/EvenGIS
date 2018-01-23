@@ -134,6 +134,13 @@
     </select>
 
     <input type="button" id="actionButton" value="Execute Action!" onclick="layerAction()">
+    <div id="thing" class="thing">
+    </div>
+    <div id="thing2" class="thing thing2">
+        <label for="colorWell">Color:</label>
+        <input type="color" value="#ff0000" id="colorWell" onchange="changeColour(colorWell.value)">
+    </div>
+
 
     <script>
         var selectLayer = document.getElementById("layerControl");
@@ -312,5 +319,28 @@
 </script>
 
 
+<!--start changeOfColour-->
+<script>
+    var tog = document.getElementById("tog");
+    var thing = document.getElementById("thing");
+    var thing2 = document.getElementById("thing2");
+
+    tog.addEventListener("click", function () {
+
+        thing.classList.toggle("m-fadeOut");
+        thing2.classList.toggle("m-fadeIn");
+
+    });
+    <!-- Start changing-part -->
+    function getColorVal(colorValue){
+
+        alert(colorValue);
+    }
+</script>
+
+<!-- end changeOfColour-->
+
 </body>
+
+
 </html>
