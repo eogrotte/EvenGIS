@@ -8,8 +8,7 @@ function calculateBuffer() {
     console.log(bufferIndex);
 
     var innsjoBuffer = turf.buffer(layersArray[bufferIndex-1], (bufferDistanceValue/1000), {units: 'kilometers'});
-    layersArray.push(innsjoBuffer);
-    layerNames.push(bufferName);
+
 
     addToMap(innsjoBuffer, bufferName);
 
@@ -32,8 +31,7 @@ function calculateDifference() {
             alert("the difference is undefined");
         }
         else {
-            layersArray.push(difference);
-            layerNames.push(tempDifferenceName);
+            addToMap(difference, tempDifferenceName);
         }
     }
     else {
@@ -55,19 +53,18 @@ function calculateIntersection(){
 
     var intersected = turf.intersect(layersArray[indexOne-1], layersArray[indexTwo-1]);
 
-    layersArray.push(intersected);
-    layersName.push(intersectName);
-    addToMap(intersected);
+    addToMap(intersected, intersectName);
 }
 
 function calculateUnion(){
     var unionLayerOne = document.getElementById("unionLayerOne");
     var unionLayerTwo = document.getElementById("unionLayerTwo");
+    var unionName = document.getElementById("unionLayerName")
     var indexOne = unionLayerOne.selectedIndex;
     var indexTwo = unionLayerTwo.selectedIndex;
     var unionLayer = turf.union(layerArray[indexOne-1], layerArray[indexTwo-1])
 
-    addToMap(unionLayer);
+    addToMap(unionLayer, unionName);
 }
 
 function addToMap(layerTemp, layerNameTemp){
