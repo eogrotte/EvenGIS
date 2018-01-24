@@ -23,7 +23,7 @@ function drawLayers(tempLayersArray){
 }
 
 function addLayerToLists(layerName, layer){
-    //This is a method that adds a new layer to all the lists.
+    //This is a method that adds a new layer to all the lists (dropdowns).
     var selectBufferUpdate = document.getElementById("bufferLayers");
     var selectLayer = document.getElementById("layerControl");
     var selectDifference = document.getElementById("differenceLayersOne");

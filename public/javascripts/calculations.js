@@ -82,5 +82,7 @@ function addToMap(layerTemp, layerNameTemp){
         "opacity": 0.8,
         "fillOpacity": 0.7,
     };
-    L.geoJson(layerTemp, {style: tempStyle}).addTo(map);
+    var newLayer = L.geoJson(layerTemp, {style: tempStyle});
+    layerVars.push(newLayer);
+    layerVars[layerVars.length-1].addTo(map);
 }
